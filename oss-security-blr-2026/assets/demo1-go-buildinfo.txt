@@ -1,0 +1,29 @@
+$ go version -m ./goapp
+/tmp/claude-1000/-var-home-bupd-code-talks/83040a97-c54a-431a-8366-62dd8e16db96/scratchpad/goapp: go1.27.0
+	path	github.com/bupd/sbom-demo-app
+	mod	github.com/bupd/sbom-demo-app	(devel)	
+	dep	github.com/fatih/color	v1.19.0	h1:Zp3PiM21/9Ld6FzSKyL5c/BULoe/ONr9KlbYVOfG8+w=
+	dep	github.com/mattn/go-colorable	v0.1.14	h1:9A9LHSqF/7dyVVX6g0U9cwm9pG3kP9gSzcuIPHPsaIE=
+	dep	github.com/mattn/go-isatty	v0.0.20	h1:xfD0iDuEKnDkl03q4limB+vH+GxLEtL/jb4xVJSWWEY=
+	dep	golang.org/x/sys	v0.42.0	h1:omrd2nAlyT5ESRdCLYdm3+fMfNFE/+Rf4bDIQImRJeo=
+	build	-buildmode=exe
+	build	-compiler=gc
+	build	CGO_ENABLED=1
+	build	CGO_CFLAGS=
+	build	CGO_CPPFLAGS=
+	build	CGO_CXXFLAGS=
+	build	CGO_LDFLAGS=
+	build	GOARCH=amd64
+	build	GOOS=linux
+	build	GOAMD64=v1
+	build	vcs=git
+	build	vcs.revision=0baf4ee4bce0bd9f495c3b9250c242cc2f12faa6
+	build	vcs.time=2026-09-03T02:00:21Z
+	build	vcs.modified=true
+
+$ strings ./goapp | grep -m5 "dep\s"
+dep	github.com/fatih/color	v1.19.0	h1:Zp3PiM21/9Ld6FzSKyL5c/BULoe/ONr9KlbYVOfG8+w=
+dep	github.com/mattn/go-colorable	v0.1.14	h1:9A9LHSqF/7dyVVX6g0U9cwm9pG3kP9gSzcuIPHPsaIE=
+dep	github.com/mattn/go-isatty	v0.0.20	h1:xfD0iDuEKnDkl03q4limB+vH+GxLEtL/jb4xVJSWWEY=
+dep	golang.org/x/sys	v0.42.0	h1:omrd2nAlyT5ESRdCLYdm3+fMfNFE/+Rf4bDIQImRJeo=
+dep	github.com/fatih/color	v1.19.0	h1:Zp3PiM21/9Ld6FzSKyL5c/BULoe/ONr9KlbYVOfG8+w=
