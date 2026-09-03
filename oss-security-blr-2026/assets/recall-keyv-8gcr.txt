@@ -1,0 +1,10 @@
+RECALL NOTICE: keyv
+Checking fleet of 7 images in 8gcr.container-registry.dev/oss-security-demo ...
+
+app1      clean
+app2      AFFECTED  keyv@4.5.3  (image sha256:c684ec8aae0a)
+app3      clean
+app4      clean
+app5      AFFECTED  keyv@4.5.3  (image sha256:7266613100cc)
+app6      clean
+goapp     clean

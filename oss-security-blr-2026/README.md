@@ -19,6 +19,35 @@ assets/      # screenshots, images, diagrams captured from demos
 slides/      # final slides (built separately, after demos are solid)
 ```
 
+## The pipeline the demos walk through
+
+```mermaid
+flowchart LR
+    subgraph build["BUILD (demos 1-3)"]
+        src["source + lock files<br/>package-lock.json / go.mod"] --> img["container image<br/>(layers of tarballs)"]
+        img -->|"syft / trivy<br/>read layers, pkg DBs,<br/>embedded build info"| sbom["SBOM<br/>SPDX / CycloneDX"]
+    end
+    subgraph store["STORE (demo 4)"]
+        harbor["Harbor registry"]
+        sbom -->|"auto on push<br/>or oras attach"| acc["OCI accessory<br/>linked to image DIGEST"]
+        acc --- harbor
+    end
+    subgraph use["USE (demo 5)"]
+        advisory["advisory:<br/>package X recalled"] --> query["query fleet SBOMs"]
+        query --> hit["affected digests<br/>= chassis list"]
+        hit --> fix["rebuild → push v2<br/>→ re-query → clean"]
+    end
+    harbor --> query
+```
+
+## Registries (fleet lives on all three)
+
+| registry | native SBOM gen | notes |
+|---|---|---|
+| `8gcr.container-registry.dev` (kumar) | ✅ works — **use for the talk** | `sbom.harbor` accessory auto on push |
+| `bootc.8gears.container-registry.dev` (admin) | ❌ adapter→core 500 | oras-attached SBOMs work |
+| `demo.goharbor.io` (kumar) | ❌ PostScan auth misconfig | oras-attached SBOMs work; resets periodically |
+
 ## Demos (independent, each runnable on its own)
 
 | # | Demo | Punchline |

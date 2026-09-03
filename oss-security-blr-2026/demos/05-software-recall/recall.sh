@@ -18,8 +18,11 @@ echo
 
 for img in "${FLEET[@]}"; do
   # 1. find the SBOM attached to this image (the "service book in the glovebox")
+  #    matches both oras-attached SPDX and Harbor-native (sbom.harbor) accessories
   sbom_manifest=$(oras discover --format json "$REG/$img:v1" \
-    | jq -r '.referrers[] | select(.artifactType=="application/spdx+json") | .digest' | head -1)
+    | jq -r '.referrers[] | select(.artifactType=="application/spdx+json"
+                                or .artifactType=="application/vnd.goharbor.harbor.sbom.v1")
+             | .digest' | head -1)
 
   if [ -z "$sbom_manifest" ]; then
     printf '%-8s  NO SBOM — cannot answer. This is the pre-SBOM world.\n' "$img"
