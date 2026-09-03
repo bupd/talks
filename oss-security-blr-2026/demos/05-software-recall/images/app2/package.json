@@ -1,0 +1,7 @@
+{
+  "name": "app2",
+  "version": "1.0.0",
+  "description": "SBOM demo fleet - app2",
+  "main": "index.js",
+  "dependencies": { "express": "^4.19.0", "keyv": "4.5.3" }
+}

@@ -1,0 +1,25 @@
+image: bootc.8gears.container-registry.dev/oss-security-demo/app2:v1
+
+$ jq ".components | length" trivy.cdx.json syft.cdx.json
+trivy: 294
+syft:  652
+
+# components only syft found:
+/app/node_modules/accepts/package.json
+/app/node_modules/array-flatten/package.json
+/app/node_modules/body-parser/package.json
+/app/node_modules/bytes/package.json
+/app/node_modules/call-bind-apply-helpers/package.json
+/app/node_modules/call-bound/package.json
+/app/node_modules/content-disposition/package.json
+/app/node_modules/content-type/package.json
+
+# components only trivy found:
+agent
+arborist
+bundle
+canonical-json
+cliui
+config
+core
+fs

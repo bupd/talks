@@ -1,0 +1,33 @@
+$ podman save app2:v1 -o img.tar && tar -xf img.tar -C img/
+$ ls img/blobs/sha256/ | head -5   # an image is just tarballs
+08b533e5f5fad6d3a165a5d0f2e624c683d78e2a09f30914b165d628708d6967
+37057f1dd4dda633078d83865548841751fcd1cb1d9bf9dc2f8ff4f07d5da645
+39ecbebc57960f9450592274c3ac072ea869ef5241c8e681d4700154baf8b102
+7a4547c1caa70465441dfe660e03ffc8e4281d533c6da15b86840cc6867d3dc2
+85880ec57a71ce790d9b454afab081e80134325090ea116c31a4aa3791882e21
+
+$ for l in img/blobs/sha256/*; do tar -tzf $l 2>/dev/null | grep -l . >/dev/null && ...; done
+# find the layer holding the OS package DB:
+layer: 37057f1dd4dda633...
+layer: 39ecbebc57960f94...
+layer: 85880ec57a71ce79...
+
+$ tar -xzOf <layer> lib/apk/db/installed | head -12   # the apk DB is PLAIN TEXT
+C:Q1VFqm8pEgmviZMrdh2eQiwneFlsw=
+P:alpine-baselayout
+V:3.7.2-r0
+A:x86_64
+S:8279
+I:6552
+T:Alpine base dir structure and init scripts
+U:https://gitlab.alpinelinux.org/alpine/aports/-/tree/master/main/alpine-baselayout
+L:GPL-2.0-only
+o:alpine-baselayout
+m:Natanael Copa <ncopa@alpinelinux.org>
+t:1774422169
+
+# and the npm side — the lock file trivy/syft read:
+app/package-lock.json
+$ tar -xzOf <layer> app/package-lock.json | jq ".packages | keys | length"
+71
+(declared 2 deps in package.json -> resolved packages in the lock file)
