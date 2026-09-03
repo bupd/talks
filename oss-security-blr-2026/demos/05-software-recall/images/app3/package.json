@@ -1,0 +1,7 @@
+{
+  "name": "app3",
+  "version": "1.0.0",
+  "description": "SBOM demo fleet - app3",
+  "main": "index.js",
+  "dependencies": { "fastify": "^4.28.0" }
+}

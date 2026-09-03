@@ -1,0 +1,7 @@
+{
+  "name": "app4",
+  "version": "1.0.0",
+  "description": "SBOM demo fleet - app4",
+  "main": "index.js",
+  "dependencies": { "axios": "^1.7.0" }
+}
